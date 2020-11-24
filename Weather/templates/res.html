@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="row">
+  <div class="col-6 text-light">
+    <p style="padding-left: 450px;">City Name: {{city}}</p>
+    <p style="padding-left: 450px;">Current Temperature: {{temp}}&#8451</p>
+    <p style="padding-left: 450px;">Maximum Temperature: {{temp_max}}&#8451</p>
+    <p style="padding-left: 450px;">Minimum Temperature: {{temp_min}}&#8451</p>
+    <p style="padding-left: 450px;">Humidity: {{humidity}}%</p>
+    <p style="padding-left: 450px;">Pressure: {{pressure}} millibars</p>
+    <p style="padding-left: 450px;">Feels Like: {{feels}}&#8451</p>
+  </div>
+  <div class="col-6" style="padding-left:150px;" >
+    <img src="{{ico}}" style=" border:solid 2px white; border-radius:100%; background-color:#ffc85c" alt="Icon for weather">
+    <p class="text-light">{{desc}}</p>
+  </div>
+</div>
+<div class="container" height="50" width="50">
+  <img src={% static i %} alt="fantasy" height="300" width="300">
+</div>
+
+{% endblock %}

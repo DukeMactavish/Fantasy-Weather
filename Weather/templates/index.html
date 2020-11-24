@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-flow" style="padding-top:40px;" >
+  <form class="form-inline d-flex justify-content-center md-form form-sm" action="process" method="post">
+    {% csrf_token %}
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" name="city">
+    <button class="btn aqua-gradient btn-rounded btn-sm my-0 btn-outline-light" type="submit">
+      <i class="fas fa-search -left" aria-hidden="true" ></i>  Search
+    </button>
+  </form>
+</div>
+{% endblock %}
