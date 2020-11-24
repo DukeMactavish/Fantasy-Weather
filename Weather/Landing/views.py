@@ -1,8 +1,8 @@
 from django.shortcuts import render
 import requests
 import json
-
-
+import random
+import os
 
 
 class Weather:
@@ -26,29 +26,41 @@ class Weather:
         #print(json.dumps(data, indent=2, sort_keys=True))
     def image_select(self,temp):
         if temp<0:
-            return "hoth.jpg"
+            ls=["Hoth.jpg","Niflheim.jpg","Land of always winter.jpg"]
+            return random.choice(ls)
         elif temp>=0 and temp<5:
-            return "Berk.png"
+            ls=["Berk.png","North.jpg","Jotunheim.png","Drum Island.jpg"]
+            return random.choice(ls)
         elif temp>=5 and temp<10:
-            return "Asguard.jpg"
+            ls=["Asguard.jpg","Vanaheim.jpg"]
+            return random.choice(ls)
         elif temp>=10 and temp<15:
-            return "hogwarts.jpg"
+            ls=["Hogwarts.jpg","Alfheim.jpg"]
+            return random.choice(ls)
         elif temp>=15 and temp<20:
-            return "Hobbiton.jpg"
+            ls=["Hobbiton.jpg","Konoha.jpg",]
+            return random.choice(ls)
         elif temp>=20 and temp<25:
-            return "Naboo.jpg"
+            ls=["Paradis.jpeg","Naboo.jpg"]
+            return random.choice(ls)
         elif temp>=25 and temp<30:
-            return "Dantooine.jpg"
+            ls=["Wankanda.jpg","Alola.jpg","Dantooine.jpg"]
+            return random.choice(ls)
         elif temp>=30 and temp<35:
-            return "Fire nation.jpg"
+            ls=["Fire nation.jpg","Stormlands.jpg"]
+            return random.choice(ls)
         elif temp>=35 and temp<40:
-            return "Sunagakure.jpg"
+            ls=["Sunagakure.jpg","Dagobah.jpeg"]
+            return random.choice(ls)
         elif temp>=40 and temp<45:
-            return "Agrabah.png"
+            ls=["Alabasta.jpg","Agrabah.png","Agrabah.jpg"]
+            return random.choice(ls)
         elif temp>=45 and temp<50:
-            return "Tatooine.jpg"
+            ls=["Tatooine.jpg","Dorne.jpg"]
+            return random.choice(ls)
         elif temp>=50:
-            return "Mordor.jpg"
+            ls=["Mordor.jpg","Muspelheim.jpg","Mustafar.jpeg"]
+            return random.choice(ls)
 # Create your views here.
 def home(request):
     return render(request,'index.html')
@@ -66,7 +78,9 @@ def process(request):
     feel=j['main']['feels_like']
     icon="http://openweathermap.org/img/wn/"+j['weather'][0]['icon']+"@2x.png"
     descrip=j['weather'][0]['description'].title()
-    im='Fantasy/'+ob.image_select(c_temp)
+    ln=ob.image_select(c_temp)
+    im='Fantasy/'+ln
+    land=os.path.splitext(ln)[0]
     return render(request, 'res.html',{
         'city':city_n,
         'temp':c_temp,
@@ -77,5 +91,6 @@ def process(request):
         'feels':feel,
         'ico':icon,
         'desc':descrip,
-        'i':im
+        'i':im,
+        'l':land,
     })
